@@ -6,8 +6,8 @@ from log import *
 
 sys.path.append(os.getcwd())
 from config import *
-
-### from tempsensoren import TSens as TS
+from time import sleep
+from Pump_control import Zeit, PZon, PZoff
 
 sh = os.system
 ####################################################################################################################################
@@ -162,25 +162,40 @@ def ST0(e):
             write_Vzustand(0)
 
 def Control(d):
-  inhalt = d
-  y = 0
-  while y != 3:
-    if y == 0:
-        print "...teste Ventiloptionen"                                      # ...zum testen
-        print "exec ST100"
-       	ST100(inhalt)
-        y = 1
-    elif y == 1:
-        print "exec ST50"                                       # ...zum testen
-        ST50(inhalt)
-        y = 2
-    elif y == 2:
-        print "exec ST0"                                        # ...zum testen
-        ST0(inhalt)
-        y = 3
-  print "-------------------------------"
-  print "Control durchgelaufen.........."      
-  print "-------------------------------"
+    inhalt = d
+    y = 0
+    if PZon <= Zeit:                                          ### Anlage ist im Zeitrahmen
+      if PZoff >= Zeit:                                       ###
+        while y != 3:
+            if y == 0:
+                print "...teste Ventiloptionen"                         # ...zum testen
+                print "exec ST100"
+       	        ST100(inhalt)
+                y = 1
+            elif y == 1:
+                print "exec ST50"                                       # ...zum testen
+                ST50(inhalt)
+                y = 2
+            elif y == 2:
+                print "exec ST0"                                        # ...zum testen
+                ST0(inhalt)
+                y = 3
+    if PZon >= Zeit:                                       ### ...Zeit vor Beginn.
+        if inhalt != 0:                                    # Ventilzustand steht nicht auf 0
+            if inhalt == 100:
+                sh(VZ100)
+            else:
+                sh(VZ50)
+    elif PZoff <= Zeit:                                    ### ...Zeit nach Ende.
+        if inhalt != 0:                                    # Ventilzustand steht nicht auf 0
+            if inhalt == 100:
+                sh(VZ100)
+            else:
+                sh(VZ50)
+
+    print "---------------------------------"
+    print "- Ventil_Control durchgelaufen. -"      
+    print "---------------------------------"
 
 def Countdown(boom):
     min = 1
@@ -206,12 +221,12 @@ def file_check():
 ##########################################################################################################################################
 def error_prevent():
     if diff_ps >= SerrTemp:
-        print "EE - Es gab einen Fehler bei der Ventilumstellung !"
+        print "EE - Es gab einen Fehler bei der Ventilumstellung !"          # ...zum testen
         print "ii - Ventil wird auf 100 gestellt !"                          # ...zum testen
         sh(VS100)
         write_Vzustand(100)
     if diff_ps <= -SerrTemp:
-        print "EE - Es gab einen Fehler bei der Ventilumstellung !"
+        print "EE - Es gab einen Fehler bei der Ventilumstellung !"          # ...zum testen
         print "ii - Ventil wird auf 100 gestellt !"                          # ...zum testen
         sh(VZ100)
         write_Vzustand(0)
