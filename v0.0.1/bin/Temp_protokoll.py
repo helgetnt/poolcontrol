@@ -5,7 +5,7 @@ import ConfigParser
 
 sys.path.append(os.getcwd())
 from config import *
-#from tempsensoren import TSens as TS
+from log import *
 
 from time import *
 lt = localtime()
@@ -43,9 +43,9 @@ def check_poolcontrol():
     a = 0
     while a != 1:
         read_poolcontrol()
-        if c != '1':
-            print "Poolcontrol ist derzeit aktiv. Warte 20sec......"    # ...zum testen
-            sleep(20)
+        if c != '0':
+            print "Poolcontrol ist derzeit aktiv. Warte 10sec......"    # ...zum testen
+            sleep(10)
             #print "nochmal testen.........."
         elif c == '0':
             print "Poolcontrol ist inaktiv. Starte Job......"           # ...zum testen
@@ -130,29 +130,8 @@ def prepare_last():
 ##########################################################################################################################################
 
 def main():
-#    if read_poolcontrol == '0':
-#        from tempsensoren import sensorcheck  
-#        sensorcheck()
-
-    check_poolcontrol()
-
-#    tmp = RAM_DIR+"Sensoren.tmp"
-#    if os.path.isfile(tmp) is False:
-#        stemp1 = stemp1
-#        stemp2 = stemp2
-#        stemp3 = stemp3
-#    if os.path.isfile(tmp) is True:
-#        conf = ConfigParser.ConfigParser()
-#        conf.read(tmp)
-#        stemp1 = float(conf.get("sensors", "temp1"))
-#        stemp2 = float(conf.get("sensors", "temp2"))
-#        stemp3 = float(conf.get("sensors", "temp3"))
-
-#    print('Sensor    | Temperatur')			### Zum Testen...
-#    print('----------------------')			### Ausgabe
-#    print 'Sensor_1 -> ' , stemp1			    ### in
-#    print 'Sensor_2 -> ' , stemp2			    ### Terminal
-#    print 'Sensor_3 -> ' , stemp3			    ### ...Ende.
+    write_Control__Zustand("3")
+    #check_poolcontrol()
 
     prepare_first()
     printLog()

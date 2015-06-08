@@ -28,8 +28,8 @@ Web_DIR="/usr/lib/cgi-bin/"                     # Pfad zum Webscript
 #Web_DIR="/usr/lib/cgi-bin/"
 
 ### Poolcontrol
-LOG=RAM_DIR+"Poolcontrol.log"                   # Logdatei
-Controlzustand=RAM_DIR+"Controlzustand.TNT"     # aktiv -> 0=AUS / 1=VentilControl / 2=TempProtokoll
+LOG=RAM_DIR+"Polcontrol.log"                   # Logdatei
+Controlzustand=RAM_DIR+"Controlzustand.TNT"     # aktiv -> 0=AUS / 1=PoolControl / 2=TempProtokoll / 3=VentilControl
 
 ### Pumpenzustand
 Pzeit=RAM_DIR+"Pumpenlaufzeit.TNT"              # Pumpenlaufzeit in sec. (...wird erst nach ausschalten der Pumpe geloggt!)

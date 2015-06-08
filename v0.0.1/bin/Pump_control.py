@@ -26,6 +26,7 @@ Zeitformat = "%Y-%m-%d %H:%M:%S"
 logZF = "%d.%m.%Y-%H:%M:%S"
 sh = os.system
 dat  = sorted([fn for fn in os.listdir(LOG_DIR) if any([fn.endswith('.dat')])])
+last_dat = str(LOG_DIR+max(dat))
 ####################################################################################################################################
 
 def prepare_first():                  ###
@@ -123,10 +124,18 @@ def Pumpe(an):                 ###
           if read_Pzustand() == "0":
             print "Pumpe wird jetzt eingeschaltet !!!"
           sh(Pon)
+          sleep(1)
+          sh(Pon)
+          sleep(1)
+          sh(Pon)
           write_Pzustand(1)
             
     if an == "0":
           print "Pumpe wird jetzt ausgeschaltet !!!"
+          sh(Poff)
+          sleep(1)
+          sh(Poff)
+          sleep(1)
           sh(Poff)
           write_Pzustand(0)
 

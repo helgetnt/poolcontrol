@@ -8,12 +8,8 @@ from Pump_control import read_Pzustand, sh, Zeit, PZon, PZoff, Pumpe
 
 Datum_Zeit = time.strftime("%d.%m.%Y-%H:%M:%S")
 tmp = RAM_DIR+"Sensoren.tmp"
-#sh = os.system
-#dat  = sorted([fn for fn in os.listdir(LOG_DIR) if any([fn.endswith('.dat')])])
-#last_dat = str(LOG_DIR+max(dat))
 
-#####################################################################################################################################
-#class TSens():
+####################################################################################################################################
 def sensorcheck():
         a = 0
         if os.path.isfile(SensorFile1) is False:

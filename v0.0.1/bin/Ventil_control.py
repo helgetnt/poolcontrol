@@ -8,6 +8,7 @@ sys.path.append(os.getcwd())
 from config import *
 from time import sleep
 from Pump_control import Zeit, PZon, PZoff
+#from log import dat, last_dat, last_temp
 
 sh = os.system
 ####################################################################################################################################
@@ -67,7 +68,8 @@ max_diff_ps = float(max_diff_ps)
 max_diff_sp = float(max_diff_sp)
 max_diff_ls = float(max_diff_ls)
 SerrTemp = errorTemp/2
-
+errTempSp = last_temp(2) + SerrTemp
+errTempSm = last_temp(2) - SerrTemp
 diff_ps = stemp2 - stemp1
 diff_sp = stemp1 - stemp2
 diff_ls = stemp2 - stemp3
@@ -219,21 +221,23 @@ def file_check():
 
   ### ...Zeit bis hier rund 10 Sekunden !!! ###
 ##########################################################################################################################################
+
 def error_prevent():
-    if diff_ps >= SerrTemp:
+    print "ii - Untersuchung auf Unstimmigkeiten !!"
+    if  stemp2 >= errTempSp:
         print "EE - Es gab einen Fehler bei der Ventilumstellung !"          # ...zum testen
         print "ii - Ventil wird auf 100 gestellt !"                          # ...zum testen
         sh(VS100)
         write_Vzustand(100)
-    if diff_ps <= -SerrTemp:
+    if  stemp2 <= errTempSm:
         print "EE - Es gab einen Fehler bei der Ventilumstellung !"          # ...zum testen
-        print "ii - Ventil wird auf 100 gestellt !"                          # ...zum testen
+        print "ii - Ventil wird auf 0 gestellt !"                          # ...zum testen
         sh(VZ100)
         write_Vzustand(0)
     
 ##########################################################################################################################################
 def main():
-    write_Control__Zustand("1")
+    write_Control__Zustand("3")
     file_check()
     inhalt = read_Vzustand()
     print '--------------------------------'
