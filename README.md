@@ -7,6 +7,5 @@ Automatic Pool Controller, with 3 Temp.-Sensors &amp; 1 Engine Valve, logging an
 ...functional, but not yet completed !!!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 **--- The use of the provided material, EXPRESS at your own risk. ---**
-°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
