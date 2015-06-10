@@ -6,6 +6,8 @@ sys.path.append(os.getcwd())
 
 from config import *
 from bin.log import *
+from bin.tempsensoren import tmp
+tmp_last = RAM_DIR+"Sensoren_last.tmp"
 
 Datum = time.strftime("%d.%m.%Y")                      # Datumsstempel 
 Zeit = time.strftime("%H:%M:%S")                       # Zeitstempel
@@ -16,7 +18,6 @@ refillfile = time.strftime("%Y-%m-%d.rf")               # Refill-Logdatei
 log = LOG_DIR
 ftp = FTP_DIR
 ftp2 = FTP_DIR2
-
 ##########################################################################################################################################
 class Logger(object):
     def __init__(self, filename="Default.log"):
@@ -52,6 +53,8 @@ def main():
     prepare_first(logfile)
     prepare_first(plogfile)
     prepare_first(vlogfile)
+    print "letzte Temps werden gesichert."
+    shutil.copyfile(tmp, tmp_last)
     print "======================"
     a = 0
     while a == 0:

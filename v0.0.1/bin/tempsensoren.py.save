@@ -9,7 +9,7 @@ from Pump_control import read_Pzustand, sh, Zeit, PZon, PZoff, Pumpe
 Datum_Zeit = time.strftime("%d.%m.%Y-%H:%M:%S")
 tmp = RAM_DIR+"Sensoren.tmp"
 
-####################################################################################################################################
+#####################################################################################################################################
 def sensorcheck():
         a = 0
         if os.path.isfile(SensorFile1) is False:
@@ -95,18 +95,6 @@ def stemp3(faktor):                                                   ### Def: S
 ####################################################################################################################################
 def get_temp(num):
         k = RAM_DIR+"Sensoren.tmp"
-        conf = ConfigParser.ConfigParser()
-        conf.read(k)
-        if num == 1:
-            data = conf.get("sensors", "temp1")
-        if num == 2:
-            data = conf.get("sensors", "temp2")
-        if num == 3:
-            data = conf.get("sensors", "temp3")
-        return float(data)
-
-def get_lastTemp(num):
-        k = RAM_DIR+"Sensoren_last.tmp"
         conf = ConfigParser.ConfigParser()
         conf.read(k)
         if num == 1:
