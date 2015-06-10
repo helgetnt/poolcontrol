@@ -8,14 +8,9 @@ sys.path.append(os.getcwd())
 from config import *
 from time import sleep
 from Pump_control import Zeit, PZon, PZoff
-#import tempsensoren as TS
+#from log import dat, last_dat, last_temp
 
 sh = os.system
-tmp_last = RAM_DIR+"Sensoren_last.tmp"
-#last_temp1 = TS.get_lastTemp(1)
-#last_temp2 = TS.get_lastTemp(2)
-#last_temp3 = TS.get_lastTemp(3)
-
 ####################################################################################################################################
 def write_Vzustand(stand):
     x = Ventilzustand
@@ -64,12 +59,6 @@ if os.path.isfile(tmp) is True:
     stemp1 = float(conf.get("sensors", "temp1"))
     stemp2 = float(conf.get("sensors", "temp2"))
     stemp3 = float(conf.get("sensors", "temp3"))
-if os.path.isfile(tmp_last) is True:
-    conf = ConfigParser.ConfigParser()
-    conf.read(tmp_last)
-    last_temp1 = float(conf.get("sensors", "temp1"))
-    last_temp2 = float(conf.get("sensors", "temp2"))
-    last_temp3 = float(conf.get("sensors", "temp3"))
 
 ####################################################################################################################################
 ####################################################################################################################################
@@ -79,8 +68,8 @@ max_diff_ps = float(max_diff_ps)
 max_diff_sp = float(max_diff_sp)
 max_diff_ls = float(max_diff_ls)
 SerrTemp = errorTemp/2
-errLmS = last_temp2 - stemp2
-errSmL = stemp2 - last_temp2
+errTempSp = last_temp(2) + SerrTemp
+errTempSm = last_temp(2) - SerrTemp
 diff_ps = stemp2 - stemp1
 diff_sp = stemp1 - stemp2
 diff_ls = stemp2 - stemp3
@@ -197,18 +186,14 @@ def Control(d):
         if inhalt != 0:                                    # Ventilzustand steht nicht auf 0
             if inhalt == 100:
                 sh(VZ100)
-                print "Ruhezeit- -> VZ100"
-            elif inhalt == 50:
+            else:
                 sh(VZ50)
-                print "Ruhezeit- -> VZ50"
     elif PZoff <= Zeit:                                    ### ...Zeit nach Ende.
         if inhalt != 0:                                    # Ventilzustand steht nicht auf 0
             if inhalt == 100:
                 sh(VZ100)
-                print "Ruhezeit+ -> VZ100"
-            elif inhalt == 50:
+            else:
                 sh(VZ50)
-                print "Ruhezeit+ -> VZ50"
 
     print "---------------------------------"
     print "- Ventil_Control durchgelaufen. -"      
@@ -239,18 +224,17 @@ def file_check():
 
 def error_prevent():
     print "ii - Untersuchung auf Unstimmigkeiten !!"
-    if errSmL > SerrTemp:
+    if  stemp2 >= errTempSp:
         print "EE - Es gab einen Fehler bei der Ventilumstellung !"          # ...zum testen
         print "ii - Ventil wird auf 100 gestellt !"                          # ...zum testen
         sh(VS100)
         write_Vzustand(100)
-    elif errSmL < -SerrTemp:
+    if  stemp2 <= errTempSm:
         print "EE - Es gab einen Fehler bei der Ventilumstellung !"          # ...zum testen
         print "ii - Ventil wird auf 0 gestellt !"                          # ...zum testen
         sh(VZ100)
         write_Vzustand(0)
-    else:
-        print "ii - Alles OK."
+    
 ##########################################################################################################################################
 def main():
     write_Control__Zustand("3")
@@ -265,7 +249,6 @@ def main():
     print '--------------------------------'
     print 'ps ' , diff_ps , ' --> max_ps' , max_diff_ps
     print 'sp ' , diff_sp , ' --> max_sp' , max_diff_sp
-    print 'last_temp2', last_temp2
     #print 'ls ' , diff_ls , ' --> max_ls' , max_diff_ls
     #print 'toll1 ' , toll1 , ' --> max_sp' , max_diff_sp
     print 'read_Vzustand ' , inhalt

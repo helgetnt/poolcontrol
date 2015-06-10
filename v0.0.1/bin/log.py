@@ -21,7 +21,7 @@ dat  = sorted([fn for fn in os.listdir(LOG_DIR) if any([fn.endswith('.dat')])])
 last_dat = str(LOG_DIR+max(dat))
 ##########################################################################################################################################
 def last_temp(n):
-    last_temps = read_file(last_dat)[:-2].split(' ')
+    last_temps = read_file(last_dat)[:-2].split(' ') 
     last_temp = float(last_temps[n])
     return last_temp
 

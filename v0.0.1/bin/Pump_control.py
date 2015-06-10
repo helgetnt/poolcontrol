@@ -119,24 +119,24 @@ def PZmind():                     ###
         PZmind = timedelta()
     return PZmind
 
-def Pumpe(n):                 ###
-    if n == "1":
+def Pumpe(an):                 ###
+    if an == "1":
           if read_Pzustand() == "0":
             print "Pumpe wird jetzt eingeschaltet !!!"
           sh(Pon)
-          #sleep(1)
-          #sh(Pon)
-          #sleep(1)
-          #sh(Pon)
+          sleep(1)
+          sh(Pon)
+          sleep(1)
+          sh(Pon)
           write_Pzustand(1)
             
-    if n == "0":
+    if an == "0":
           print "Pumpe wird jetzt ausgeschaltet !!!"
           sh(Poff)
-          #sleep(1)
-          #sh(Poff)
-          #sleep(1)
-          #sh(Poff)
+          sleep(1)
+          sh(Poff)
+          sleep(1)
+          sh(Poff)
           write_Pzustand(0)
 
 def Schalter():
@@ -165,17 +165,18 @@ def Schalter():
             else:                         # Pumpzustand steht  auf 1
                 init = True
         elif rVZst == 0:                  # Ventil steht auf zirkulieren
-            if PZgelaufen < PZmind:               # Pumpe ist weniger gelaufen, als sie muss
-                if PZrest <= Zeit:                ### Restlaufzeit der Pumpe
-                    Pumpe("1")
-                    print "Pumpe befindet sich in der Restlaufzeit."
-                    init = False                  # sorgt fuer eine Wiederholung des Einschaltbefehls
-            elif rPump != 0:
+            if rPump != 0:
                 Pumpe("0")
                 print "Pumpe aus..."
                 init = False
+            #elif PZgelaufen < PZmind:
+            #    if PZrest <= Zeit:                ### Restlaufzeit der Pumpe
+            #        Pumpe("1")
+            #        print "Beginn Pumpzeit (zum Ende) um %s bis %s" % (PZrest, PZoff)
+        #else:
+            #print "Alles ist so, wie es sein soll."
     if init == False:
-        if PZgelaufen < PZmind:               # Pumpe ist weniger gelaufen, als sie muss
+        if PZgelaufen < PZmind:
             if PZrest <= Zeit:                ### Restlaufzeit der Pumpe
                 if PZoff >= Zeit:
                     Pumpe("1")

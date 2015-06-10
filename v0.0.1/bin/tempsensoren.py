@@ -105,18 +105,6 @@ def get_temp(num):
             data = conf.get("sensors", "temp3")
         return float(data)
 
-def get_lastTemp(num):
-        k = RAM_DIR+"Sensoren_last.tmp"
-        conf = ConfigParser.ConfigParser()
-        conf.read(k)
-        if num == 1:
-            data = conf.get("sensors", "temp1")
-        if num == 2:
-            data = conf.get("sensors", "temp2")
-        if num == 3:
-            data = conf.get("sensors", "temp3")
-        return float(data)
-
 def write_tmp():
         k = RAM_DIR+"Sensoren.tmp"
         control = open(k,"w")
