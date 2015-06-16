@@ -12,12 +12,12 @@ with 3 Temp.-Sensors; 1 Engine Valve, Logging and (online) Webchart
 
 ... so, from here in German !!!
 
-benutzte Software: Raspbian, Python, Pilight/Pimatic (anfangs rcswitch-pi), Lirc (nur fuer Beleuchtung),
-                   Flask(fuer Webapp, aber dazu spaeter!),
+benutzte Software: Raspbian, Python, Pilight/Pimatic (anfangs rcswitch-pi), 
+                   Lirc (nur fuer Beleuchtung), Flask(fuer Webapp, aber dazu spaeter!),
 
 --> Empfehlung(,aber kein muss,) meinerseits <--
 Pumpe + Sandfilter > egal wie groï¿½^ï¿½ oder klein dein P
-**FÃer Verkabelung nur CAT5 Netzwerkkabel verwenden!!!
+**Fuer Verkabelung nur CAT5 Netzwerkkabel verwenden!!!
 Sonst kann ich nur sagen "learning by doing", auf die Schn... fallen faellt nicht schwer.**
 
 Etwas elektrotechnisches Wissen wird vorausgesetzt !
