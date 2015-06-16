@@ -20,7 +20,7 @@ benutzte Software: Raspbian, Python, Pilight/Pimatic (anfangs rcswitch-pi),
 Pumpe + Sandfilter > egal wie gross od. klein dein Pool ist.
 
 **Fuer Verkabelung nur CAT5 Netzwerkkabel verwenden!!!**
-** **
+
 **Sonst kann ich nur sagen "learning by doing", auf die Schn... fallen faellt nicht schwer.**
 
 Etwas elektrotechnisches Wissen wird vorausgesetzt !
