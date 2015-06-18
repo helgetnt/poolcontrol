@@ -158,26 +158,29 @@ def Schalter():
     elif PZon <= Zeit:                  ### Pumpe ist im Zeitrahmen an
       if PZoff >= Zeit:                 ###
         if rVZst != 0:                    # Ventil steht nicht komplett auf zirkulieren.
+            init = True
             if rPump == 0:                # Pumpzustand steht  auf 0
                 Pumpe("1")
                 print "rPump=0 Beginn Pumpzeit seit %s ...jetzt %s" % (PZon, Zeit)
-                init = True
+                #init = True
             else:                         # Pumpzustand steht  auf 1
-                init = True
+                #init = True
         elif rVZst == 0:                  # Ventil steht auf zirkulieren
+            init = False
             if PZgelaufen < PZmind:               # Pumpe ist weniger gelaufen, als sie muss
                 if PZrest <= Zeit:                ### Restlaufzeit der Pumpe
                     Pumpe("1")
                     print "Pumpe befindet sich in der Restlaufzeit."
-                    init = False                  # sorgt fuer eine Wiederholung des Einschaltbefehls
+                    #init = False                  # sorgt fuer eine Wiederholung des Einschaltbefehls
             elif rPump != 0:
                 Pumpe("0")
                 print "Pumpe aus..."
-                init = False
+                #init = False
+            
     if init == False:
         if PZgelaufen < PZmind:               # Pumpe ist weniger gelaufen, als sie muss
             if PZrest <= Zeit:                ### Restlaufzeit der Pumpe
-                if PZoff >= Zeit:
+                if PZoff >= Zeit:             ### ...Zeit vor Ende.
                     Pumpe("1")
                     print "Beginn Pumpzeit (zum Ende) um %s bis %s" % (PZrest, PZoff)
         else:
