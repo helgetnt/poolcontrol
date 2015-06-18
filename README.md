@@ -30,7 +30,7 @@ Fuer die Anlage wurden nur ELRO-Funksteckdosn (433 Mhz, einstellbarer System/Uni
 Fuer die Pumpe im Orginalzustand & fuer das Ventil zerlegt, um den Schaltkreis besser bauen zu koennen.
 
 Als Temperatursensor kam der "DS18S20" (wasserdicht) zum Einsatz.
-Als Ventil benutze ich ein"Honywell VMM 3-Wege-Ventil".
+Als Ventil benutze ich ein"Honeywell VMM 3-Wege-Ventil".
 
 Gebaut wurde die Anlage mit einem Zwischenverteiler nach ca. 10 Meter
 
